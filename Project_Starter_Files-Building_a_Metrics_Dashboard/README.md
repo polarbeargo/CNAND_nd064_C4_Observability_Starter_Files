@@ -1,12 +1,17 @@
+[//]: # (Image References)
+
+[image1]: ./answer-img/Exposing_Grafana.png
+[image2]: ./answer-img/verify_the_monitoring_installation.png
+
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
 ## Verify the monitoring installation
 
-*TODO:* run `kubectl` command to show the running pods and services for all components. Take a screenshot of the output and include it here to verify the installation
-
+* Run `kubectl` command to show the running pods and services for all components. Take a screenshot of the output and include it here to verify the installation
+![][image1]  
 ## Setup the Jaeger and Prometheus source
-*TODO:* Expose Grafana to the internet and then setup Prometheus as a data source. Provide a screenshot of the home page after logging into Grafana.
-
+* Expose Grafana to the internet and then setup Prometheus as a data source. Provide a screenshot of the home page after logging into Grafana.
+![][image2]  
 ## Create a Basic Dashboard
 *TODO:* Create a dashboard in Grafana that shows Prometheus as a source. Take a screenshot and include it here.
 
