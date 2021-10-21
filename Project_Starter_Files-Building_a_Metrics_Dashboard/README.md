@@ -2,6 +2,7 @@
 
 [image1]: ./answer-img/Exposing_Grafana.png
 [image2]: ./answer-img/verify_the_monitoring_installation.png
+[image3]: ./answer-img/dataSourcePrometheus.png  
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
@@ -13,8 +14,8 @@
 * Expose Grafana to the internet and then setup Prometheus as a data source. Provide a screenshot of the home page after logging into Grafana.
 ![][image2]  
 ## Create a Basic Dashboard
-*TODO:* Create a dashboard in Grafana that shows Prometheus as a source. Take a screenshot and include it here.
-
+* Create a dashboard in Grafana that shows Prometheus as a source. Take a screenshot and include it here.  
+![][image3] 
 ## Describe SLO/SLI
 *TODO:* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.
 
