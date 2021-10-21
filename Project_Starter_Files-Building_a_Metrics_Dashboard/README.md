@@ -17,8 +17,8 @@
 * Create a dashboard in Grafana that shows Prometheus as a source. Take a screenshot and include it here.  
 ![][image3] 
 ## Describe SLO/SLI
-*TODO:* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.
-
+* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.  
+A Service-Level Indicator (SLI) is a specific metric used to measure the performance of a service. SLI is a general metric to measure uptime and latency.  But truly what we require within the conclusion is a genuine estimation.  based on an SLO of monthly uptime and request-response time. In this case,  SLI would be the actual measurement of the uptime. Perhaps during that year, you actually achieved 99.5% uptime and request-response time or 97.3% uptime and request response time. These measurements are SLI. Notice that the above example is a ratio which is a measurement to a given amount of time (the measured uptime and request-response time per year).   
 ## Creating SLI metrics.
 *TODO:* It is important to know why we want to measure certain metrics for our customer. Describe in detail 5 metrics to measure these SLIs. 
 
