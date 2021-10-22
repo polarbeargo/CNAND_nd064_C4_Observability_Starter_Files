@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
     dashboard.vm.network "forwarded_port", guest: 8080, host: 8080 # API Access
     dashboard.vm.network "forwarded_port", guest: 16686, host: 16686 # Jaeger HTTP Access
     dashboard.vm.network "forwarded_port", guest: 16687, host: 16687 # Jaeger CR Access
+    dashboard.vm.network "forwarded_port", guest: 32368 , host: 32368
     for p in 30000..32767 # expose NodePort IP's
       dashboard.vm.network "forwarded_port", guest: p, host: p, protocol: "tcp"
     end
