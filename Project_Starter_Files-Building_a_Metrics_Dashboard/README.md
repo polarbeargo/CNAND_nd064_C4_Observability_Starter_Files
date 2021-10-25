@@ -2,7 +2,7 @@
 
 [image1]: ./answer-img/Exposing_Grafana.png
 [image2]: ./answer-img/verify_the_monitoring_installation.png
-[image3]: ./answer-img/dataSourcePrometheus.png  
+[image3]: ./answer-img/dataSourcePrometheus2.png
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
