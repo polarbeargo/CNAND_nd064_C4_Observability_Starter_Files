@@ -1,11 +1,9 @@
 import time
 import random
 import threading
-
 import requests
 
 endpoints = ('one', 'two', 'three', 'four', 'error')
-
 
 def run():
     while True:
@@ -15,7 +13,6 @@ def run():
 
         except:
             pass
-
 
 if __name__ == '__main__':
     for _ in range(4):
