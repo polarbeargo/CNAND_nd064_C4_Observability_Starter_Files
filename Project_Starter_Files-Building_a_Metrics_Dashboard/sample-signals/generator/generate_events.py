@@ -3,7 +3,7 @@ import random
 import threading
 import requests
 
-endpoints = ('one', 'two', 'three', 'four', 'error')
+endpoints = ('one', 'two', 'three', 'four', 'error', 'foo')
 
 def run():
     while True:
