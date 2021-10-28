@@ -3,8 +3,10 @@ import threading
 import requests
 import random
 import time
+from prometheus_flask_exporter.multiprocess import GunicornInternalPrometheusMetrics
 
 app = Flask(__name__)
+metrics = GunicornInternalPrometheusMetrics(app)
 endpoints = ('error', 'foo')
 
 def random_endpoint():
