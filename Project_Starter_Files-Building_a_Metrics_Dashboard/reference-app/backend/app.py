@@ -61,5 +61,11 @@ def add_star():
   output = {'name' : new_star['name'], 'distance' : new_star['distance']}
   return jsonify({'result' : output})
 
+@app.route('/healthz')
+def healthcheck():
+    app.logger.info('Status request successfull')
+    return jsonify({"result": "OK - healthy"})
+    
+
 if __name__ == "__main__":
     app.run(threaded=True)
