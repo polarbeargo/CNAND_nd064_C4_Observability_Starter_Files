@@ -13,7 +13,7 @@ app.config['MONGO_DBNAME'] = 'example-mongodb'
 app.config['MONGO_URI'] = 'mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb'
 
 mongo = PyMongo(app)
-metrics = PrometheusMetrics(app)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 
 # static information as metric
 metrics.info('app_info', 'Application info', version='1.0.3')
@@ -24,9 +24,9 @@ metrics.register_default(
     )
 )
 
-by_path_counter = metrics.counter(
-    'by_path_counter', 'Request count by request paths',
-    labels={'path': lambda: request.path}
+by_endpoint_counter = metrics.counter(
+    'by_endpoint_counter', 'Request count by request endpoint',
+    labels={'endpoint': lambda: request.endpoint}
 )
 
 class InvalidHandle(Exception):
@@ -45,7 +45,7 @@ class InvalidHandle(Exception):
         return error_message
 
 @app.route('/error')
-@by_path_counter
+@by_endpoint_counter
 def oops():
     return ':(', 500
 
@@ -76,18 +76,18 @@ def handle_invalid_usage(error):
     return response
 
 @app.route('/foo')
-@by_path_counter
+@by_endpoint_counter
 def get_error():
     raise InvalidHandle('error occur', status_code=410)
 
 @app.route('/')
-@by_path_counter
+@by_endpoint_counter
 def homepage(): 
     with tracer.start_span('hello-world'):
         return "Hello World"
 
 @app.route('/api')
-@by_path_counter
+@by_endpoint_counter
 def my_api():
     with tracer.start_span('api'):
         answer = "something"
@@ -95,7 +95,7 @@ def my_api():
 
 # This will return 405 error
 @app.route('/star', methods=['POST'])
-@by_path_counter
+@by_endpoint_counter
 def add_star():
   star = mongo.db.stars
   name = request.json['name']
@@ -106,7 +106,7 @@ def add_star():
   return jsonify({'result' : output})
 
 @app.route('/healthz')
-@by_path_counter
+@by_endpoint_counter
 def healthcheck():
     app.logger.info('Status request successfull')
     return jsonify({"result": "OK - healthy"})

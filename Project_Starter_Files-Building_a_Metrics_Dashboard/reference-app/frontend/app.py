@@ -8,7 +8,7 @@ import logging
 from jaeger_client import Config
 
 app = Flask(__name__)
-metrics = PrometheusMetrics(app)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 
 # static information as metric
 metrics.info('app_info', 'Application info', version='1.0.3')
@@ -19,9 +19,9 @@ metrics.register_default(
     )
 )
 
-by_path_counter = metrics.counter(
-    'by_path_counter', 'Request count by request paths',
-    labels={'path': lambda: request.path}
+by_endpoint_counter = metrics.counter(
+    'by_endpoint_counter', 'Request count by request endpoint',
+    labels={'endpoint': lambda: request.endpoint}
 )
 endpoints = ('error', 'foo', 'healthz')
 
@@ -55,7 +55,7 @@ def random_endpoint():
             pass
 
 @app.route('/')
-@by_path_counter
+@by_endpoint_counter
 def homepage():
     return render_template("main.html")
     with tracer.start_span('random_endpoint') as span:
@@ -71,7 +71,7 @@ def homepage():
 
 
 @app.route('/healthz')
-@by_path_counter
+@by_endpoint_counter
 def healthcheck():
     app.logger.info('Status request successfull')
     return jsonify({"result": "OK - healthy"})
