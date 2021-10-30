@@ -4,6 +4,9 @@ import random
 import pymongo
 from flask_pymongo import PyMongo
 from prometheus_flask_exporter import PrometheusMetrics
+from jaeger_client import Config
+import logging
+
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'example-mongodb'
@@ -31,6 +34,26 @@ class InvalidHandle(Exception):
 def oops():
     return ':(', 500
 
+def init_tracer(service):
+    logging.getLogger('').handlers = []
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+
+    config = Config(
+        config={
+            'sampler': {
+                'type': 'const',
+                'param': 1,
+            },
+            'logging': True,
+        },
+        service_name=service,
+    )
+
+    # this call also sets opentracing.tracer
+    return config.initialize_tracer()
+
+tracer = init_tracer('backend')
+
 @app.errorhandler(InvalidHandle)
 def handle_invalid_usage(error):
     response = jsonify(error.to_dict())
@@ -42,15 +65,17 @@ def get_error():
     raise InvalidHandle('error occur', status_code=410)
 
 @app.route('/')
-def homepage():
-    return "Hello World"
-
+def homepage(): 
+    with tracer.start_span('hello-world'):
+        return "Hello World"
 
 @app.route('/api')
 def my_api():
-    answer = "something"
+    with tracer.start_span('api'):
+        answer = "something"
     return jsonify(repsonse=answer)
 
+# This will return 405 error
 @app.route('/star', methods=['POST'])
 def add_star():
   star = mongo.db.stars
