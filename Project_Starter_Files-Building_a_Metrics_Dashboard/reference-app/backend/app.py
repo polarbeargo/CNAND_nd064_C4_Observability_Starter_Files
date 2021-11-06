@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from prometheus_flask_exporter import PrometheusMetrics
 from jaeger_client import Config
 import logging
+from os import getenv
 
 app = Flask(__name__)
 
@@ -28,6 +29,8 @@ by_endpoint_counter = metrics.counter(
     'by_endpoint_counter', 'Request count by request endpoint',
     labels={'endpoint': lambda: request.endpoint}
 )
+
+JAEGER_AGENT_HOST = getenv('JAEGER_AGENT_HOST', 'localhost')
 
 class InvalidHandle(Exception):
     status_code = 400
@@ -60,6 +63,7 @@ def init_tracer(service):
                 'param': 1,
             },
             'logging': True,
+            'local_agent': {'reporting_host': JAEGER_AGENT_HOST},
         },
         service_name=service,
     )
