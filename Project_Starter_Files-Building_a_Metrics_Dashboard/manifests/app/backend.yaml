@@ -20,11 +20,16 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
+      - env:
+        - name: JAEGER_AGENT_HOST
+          value: simplest-agent.observability.svc.cluster.local
         image: catzzzlol/backend:latest
         imagePullPolicy: Always
+        name: backend
         ports:
-        - containerPort: 8080
+        - name: backendport
+          containerPort: 8080
+          protocol: TCP
 ---
 apiVersion: v1
 kind: Service
