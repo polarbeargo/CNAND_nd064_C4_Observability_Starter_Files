@@ -4,6 +4,7 @@
 [image2]: ./answer-img/verify_the_monitoring_installation.png
 [image3]: ./answer-img/dataSourcePrometheus2.png
 [image4]: ./answer-img/dataSourcePrometheus.png
+[image5]: ./answer-img/jaegerSpan.png
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
@@ -50,8 +51,14 @@ A Service-Level Indicator (SLI) is a specific metric used to measure the perform
 *TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
 
 ## Tracing our Flask App
-*TODO:*  We will create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here.
+*  Create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here.
+```
+kubectl port-forward svc/backend-service 8081:8081 (then head to http://localhost:8081/api)
 
+# Call Jaeger UI
+kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 3002:16686
+```
+![][image5]   
 ## Jaeger in Dashboards
 *TODO:* Now that the trace is running, let's add the metric to our current Grafana dashboard. Once this is completed, provide a screenshot of it here.
 
