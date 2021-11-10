@@ -5,6 +5,7 @@
 [image3]: ./answer-img/dataSourcePrometheus2.png
 [image4]: ./answer-img/dataSourcePrometheus.png
 [image5]: ./answer-img/jaegerSpan.png
+[image6]: ./answer-img/jaegerGrafana.png
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
@@ -60,8 +61,8 @@ kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 
 ```
 ![][image5]   
 ## Jaeger in Dashboards
-*TODO:* Now that the trace is running, let's add the metric to our current Grafana dashboard. Once this is completed, provide a screenshot of it here.
-
+* Now that the trace is running, let's add the metric to our current Grafana dashboard. Once this is completed, provide a screenshot of it here.
+![][image6] 
 ## Report Error
 *TODO:* Using the template below, write a trouble ticket for the developers, to explain the errors that you are seeing (400, 500, latency) and to let them know the file that is causing the issue.
 
