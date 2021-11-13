@@ -6,6 +6,7 @@
 [image4]: ./answer-img/dataSourcePrometheus.png
 [image5]: ./answer-img/jaegerSpan.png
 [image6]: ./answer-img/jaegerGrafana.png
+[image7]: ./answer-img/SLIs.png  
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
@@ -49,7 +50,8 @@ A Service-Level Indicator (SLI) is a specific metric used to measure the perform
   * The SLO will be Resource capcity. The SLI for that will be he amount of CPU and RAM usage.
 
 ## Create a Dashboard to measure our SLIs
-*TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
+* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.  
+![][image7]
 
 ## Tracing our Flask App
 *  Create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here.
