@@ -73,17 +73,17 @@ kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 
 
 TROUBLE TICKET
 
-Name:
+Name: Request endpoint star fail throw 4`05 Method Not Allowed`
 
-Date:
+Date: Nov 13 2021, 17:30 PM
 
-Subject:
+Subject: Backend can't acces MongoDB
 
-Affected Area:
+Affected Area: Backend Service
 
-Severity:
+Severity: High
 
-Description:
+Description:  As we port-forwarding the application when accessing /star endpoint, it throw 405 error. The mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb URL is not exist in the cluster. We need to make the MongoDB URL available for the cluster.
 
 
 ## Creating SLIs and SLOs
