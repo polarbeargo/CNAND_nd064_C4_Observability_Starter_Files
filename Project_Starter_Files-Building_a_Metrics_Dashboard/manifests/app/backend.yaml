@@ -2,13 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
-  labels:
+  labels: 
     app: backend
-  annotations:
-    "sidecar.jaegertracing.io/inject": "true"
-    prometheus.io/scrape: 'true'
-    prometheus.io/path: '/metrics'
-    prometheus.io/port: '8081'
+  annotations: 
+    "sidecar.jaegertracing.io/inject": "true" 
 spec:
   replicas: 3
   selector:
@@ -27,9 +24,8 @@ spec:
         imagePullPolicy: Always
         name: backend
         ports:
-        - name: backendport
-          containerPort: 8080
-          protocol: TCP
+        - containerPort: 8080
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -40,12 +36,12 @@ metadata:
   name: backend-service
   labels:
     app: backend
-    release: prometheus
 spec:
   selector:
     app: backend
   ports:
-    - port: 8081
+    - name: backend
+      port: 8081
       targetPort: 8080
   type: LoadBalancer
 ---
