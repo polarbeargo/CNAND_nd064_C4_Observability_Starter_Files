@@ -56,6 +56,9 @@ A Service-Level Indicator (SLI) is a specific metric used to measure the perform
 ```
 kubectl port-forward svc/backend-service 8081:8081 (then head to http://localhost:8081/api)
 
+# Run some request to the api endpoint
+for i in 0 1 2 3 4 5 6 7 8 9; do curl localhost:8081/api; done
+
 # Call Jaeger UI
 kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 3002:16686
 ```
