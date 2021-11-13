@@ -7,6 +7,7 @@
 [image5]: ./answer-img/jaegerSpan.png
 [image6]: ./answer-img/jaegerGrafana.png
 [image7]: ./answer-img/SLIs.png  
+[image8]: ./answer-img/SLIs2.png
 
 **Note:** For the screenshots, you can store all of your answer images in the `answer-img` directory.
 
@@ -73,31 +74,41 @@ kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 
 
 TROUBLE TICKET
 
-Name:
+Name: Request endpoint star fail throw `405 Method Not Allowed`
 
-Date:
+Date: Nov 13 2021, 17:30 PM
 
-Subject:
+Subject: Backend can't acces MongoDB
 
-Affected Area:
+Affected Area: Backend Service
 
-Severity:
+Severity: High
 
-Description:
+Description:  As we port-forwarding the application accessing /star endpoint, it throw 405 error which is caused by the mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb URL is not exist in the cluster. We need to make the MongoDB URL available for the cluster.
 
 
 ## Creating SLIs and SLOs
 * Create an SLO guaranteeing that our application has a 99.95% uptime per month. Name three SLIs that you would use to measure the success of this SLO.  
- * Latency: The response time of requests should less than 30ms within a month.
- * Failure rate: Ensure that the status code 2xx rates are around 97%.
- * Uptime: Uptime nedd to be approximate 99 percent within a month and response time should be around 500 milliseconds.
+   - Latency: The response time of requests should less than 30ms within a month.
+   - Failure rate: Ensure that the status code 2xx rates are around 97%.
+   - Uptime: Uptime nedd to be approximate 99 percent within a month and response time should be around 500 milliseconds.
    
 ## Building KPIs for our plan
 * Now that we have our SLIs and SLOs, create KPIs to accurately measure these metrics. We will make a dashboard for this, but first write them down here.  
- * Latency: Response time.  
- * Failure rate: Errors per second / response rate per second.    
- * Uptime: Sucessful requests during pod uptime.  
- * Network capcity: successful request per second /  request per second.  
- * Resource capcity: CPU, RAM usage per pod.  
+   - Latency: Response time.  
+   - Failure rate: Errors per second / response rate per second.    
+   - Uptime: Sucessful requests during pod uptime.  
+   - Network capcity: successful request per second /  request per second.  
+   - Resource capcity: CPU, RAM usage per pod.  
 ## Final Dashboard
-*TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+* Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+![][image7]  
+![][image8]  
+* Uptime: Uptime of each pod.  
+* Requests per second: Number of successful Flask requests per second.  
+* Errors per second: Number of failed (non HTTP 200) responses per second.  
+* Total requests per minute: The total number of requests measured within one minute.    
+* Average response time [30s]: The average response time measured over 30 seconds.   
+* Memory usage: The memory usage of the Flask app.  
+* CPU usage: The CPU usage of the Flask app as measured over 30 seconds.   
+* Jaeger Spans: Tracing Backend Service using Jaeger.  
